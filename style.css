@@ -1,0 +1,16 @@
+.h1 {
+	font-family: Times, "Times New Roman";
+	text-align: center;
+	font-size: 48px;
+	color: #4B0082;
+}
+.h2 {
+	font-family: Times, "Times New Roman";
+	text-align: center;
+	font-size: 32px;
+	color: #9400D3;
+}
+.body {
+	font-family: Times, "Times New Roman";
+	font-size: 24px;
+}
