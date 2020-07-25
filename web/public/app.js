@@ -4,6 +4,7 @@
 //devices.push({ user: "Mary", name: "Mary's MacBook" });
 
 $('#navbar').load('navbar.html');
+$('#footer').load('footer.html');
 
 const devices = JSON.parse(localStorage.getItem('devices')) || [];
 
