@@ -3,7 +3,7 @@
 //devices.push({ user: "Alex", name: "Alex's Surface Pro" });
 //devices.push({ user: "Mary", name: "Mary's MacBook" });
 
-$('navbar').load('navbar.html');
+$('#navbar').load('navbar.html');
 
 const devices = JSON.parse(localStorage.getItem('devices')) || [];
 

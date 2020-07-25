@@ -9,10 +9,6 @@ app.get('/', (req, res) => {
 	res.sendFile(`${base}/device-list.html`);
 });
 
-app.listen(port, () => {
-	console.log(`listening on port ${port}`);
-});
-
 app.get('/register-device', (req, res) => {
 	res.sendFile(`${base}/register-device.html`);
 });
@@ -23,6 +19,10 @@ app.get('/send-command', (req, res) => {
 
 app.get('/about', (req, res) => {
 	res.sendFile(`${base}/about-me.html`);
+});
+
+app.listen(port, () => {
+	console.log(`listening on port ${port}`);
 });
 
 app.get('*', (req, res) => {
