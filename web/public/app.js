@@ -7,6 +7,7 @@ $('#navbar').load('navbar.html');
 $('#footer').load('footer.html');
 
 const devices = JSON.parse(localStorage.getItem('devices')) || [];
+const users = JSON.parse(localStorage.getItem('users')) || [];
 
 devices.forEach(function(device) {
 	$('#devices tbody').append(`
@@ -26,24 +27,20 @@ $('#add-device').on('click', function() {
 	location.href = '/';
 });
 
-$('#send-command').on('click', function() {
-	const command = $('#comand').val();
-	console.log(`command is: ${command}`);
-});
 
 $('#register').on('click', function() {
 	const username = $('#username').val();
 	const password = $('#password').val();
 	const confirmpassword = $('#confirmpassword').val();
-	const users = JSON.parse(localStorage.getItem('users')) || [];
+	
 	const userexists = users.find(user => users.name === username);
 
 	if(userexists){
 		alert("user already exists");
 		location.reload();
 	}else {
-		if(passwordinput === confirmpassword){
-			userspush({username, password});
+		if(password === confirmpassword){
+			users.push({name: username, password});
 			localStorage.setItem('users', JSON.stringify(users));
 			alert("User added");
 			location.href = '/login';
@@ -58,14 +55,14 @@ $('#register').on('click', function() {
 $('#login').on('click', function(){
 	const username = $('#username').val();
 	const password = $('#password').val();
-	var passwordMatch = false;
 	const users = JSON.parse(localStorage.getItem('users')) || [];
-	const userexists = users.find(user => users.name === username);
-	
+	var passwordMatch = false;
+	const exists = users.find(user => user.name === username);
+
 	if(exists){
-		users.find(user => {
-			if(user.username === username && user.password === password){
-				passowrdMatch = true;
+		user.find( user => {
+			if(user.username===username && user.password === password){
+				passwordMatch =true;
 			}
 		});
 
@@ -73,14 +70,20 @@ $('#login').on('click', function(){
 			localStorage.setItem('isAuthenticated', true);
 			location.href = '/';
 		}else{
-			localStorage.removeItem('isAuthenticated');
 			alert("Incorrect Password");
 		}
-			
-	}else {
+	}else{
 		alert("User does not exist");
 	}
-})
+	
+	
+});
+
+$('#send-command').on('click', function() {
+	const command = $('#comand').val();
+	console.log(`command is: ${command}`);
+});
+
 const logout = () => {
 	localStorage.removeItem('isAuthenticated');
 	location.href = '/login';
