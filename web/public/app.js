@@ -81,3 +81,7 @@ $('#login').on('click', function(){
 		alert("User does not exist");
 	}
 })
+const logout = () => {
+	localStorage.removeItem('isAuthenticated');
+	location.href = '/login';
+   }
