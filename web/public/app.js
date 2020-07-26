@@ -30,17 +30,17 @@ $('#add-device').on('click', function() {
 
 $('#register').on('click', function() {
 	const username = $('#username').val();
-	const password = $('#password').val();
+	const passwordin = $('#passwordin').val();
 	const confirmpassword = $('#confirmpassword').val();
 	
-	const userexists = users.find(user => users.name === username);
+	const userexists = users.find(user => user.name === username);
 
 	if(userexists){
 		alert("user already exists");
 		location.reload();
 	}else {
-		if(password === confirmpassword){
-			users.push({name: username, password});
+		if(passwordin === confirmpassword){
+			users.push({name: username, passwordin});
 			localStorage.setItem('users', JSON.stringify(users));
 			alert("User added");
 			location.href = '/login';
@@ -55,27 +55,24 @@ $('#register').on('click', function() {
 $('#login').on('click', function(){
 	const username = $('#username').val();
 	const password = $('#password').val();
-	const users = JSON.parse(localStorage.getItem('users')) || [];
+	//const users = JSON.parse(localStorage.getItem('users')) || [];
 	var passwordMatch = false;
-	const exists = users.find(user => user.name === username);
+	//const exists = users.find(user => user.name === username);
+	const existingAccount = users.find(user => (user.name === username));
+	const correctPassword = users.find(user => (user.name === username) && (user.passwordin === password));
 
-	if(exists){
-		user.find( user => {
-			if(user.username===username && user.password === password){
-				passwordMatch =true;
-			}
-		});
-
-		if(passwordMatch){
-			localStorage.setItem('isAuthenticated', true);
-			location.href = '/';
-		}else{
-			alert("Incorrect Password");
-		}
+	if(existingAccount && correctPassword){
+		passwordMatch = true;
+	}else if(existingAccount){
+		alert("Incorrect Password");
 	}else{
-		alert("User does not exist");
+		alert("Incorrect Username");
 	}
 	
+	if(passwordMatch){
+		localStorage.setItem('isAuthenticated', true);
+		location.href = '/';
+	}
 	
 });
 
