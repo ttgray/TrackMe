@@ -7,7 +7,6 @@ $('#navbar').load('navbar.html');
 $('#footer').load('footer.html');
 
 const devices = JSON.parse(localStorage.getItem('devices')) || [];
-const users = JSON.parse(localStorage.getItem('users')) || [];
 
 devices.forEach(function(device) {
 	$('#devices tbody').append(`
@@ -32,15 +31,15 @@ $('#send-command').on('click', function() {
 	console.log(`command is: ${command}`);
 });
 
-$('#registeruser').on('click', function() {
+$('#register').on('click', function() {
 	const username = $('#username').val();
 	const password = $('#password').val();
 	const confirmpassword = $('#confirmpassword').val();
+	const users = JSON.parse(localStorage.getItem('users')) || [];
+	const userexists = users.find(user => users.name === username);
 
-	const exists = users.find(user => users.name === username);
-
-	if(exists){
-		alert("user exists");
+	if(userexists){
+		alert("user already exists");
 		location.reload();
 	}else {
 		if(passwordinput === confirmpassword){
@@ -55,3 +54,30 @@ $('#registeruser').on('click', function() {
 	}
 	
 });
+
+$('#login').on('click', function(){
+	const username = $('#username').val();
+	const password = $('#password').val();
+	var passwordMatch = false;
+	const users = JSON.parse(localStorage.getItem('users')) || [];
+	const userexists = users.find(user => users.name === username);
+	
+	if(exists){
+		users.find(user => {
+			if(user.username === username && user.password === password){
+				passowrdMatch = true;
+			}
+		});
+
+		if(passwordMatch){
+			localStorage.setItem('isAuthenticated', true);
+			location.href = '/';
+		}else{
+			localStorage.removeItem('isAuthenticated');
+			alert("Incorrect Password");
+		}
+			
+	}else {
+		alert("User does not exist");
+	}
+})
