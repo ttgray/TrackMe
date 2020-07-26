@@ -7,6 +7,7 @@ $('#navbar').load('navbar.html');
 $('#footer').load('footer.html');
 
 const devices = JSON.parse(localStorage.getItem('devices')) || [];
+const users = JSON.parse(localStorage.getItem('users')) || [];
 
 devices.forEach(function(device) {
 	$('#devices tbody').append(`
@@ -29,4 +30,28 @@ $('#add-device').on('click', function() {
 $('#send-command').on('click', function() {
 	const command = $('#comand').val();
 	console.log(`command is: ${command}`);
+});
+
+$('#registeruser').on('click', function() {
+	const username = $('#username').val();
+	const password = $('#password').val();
+	const confirmpassword = $('#confirmpassword').val();
+
+	const exists = users.find(user => users.name === username);
+
+	if(exists){
+		alert("user exists");
+		location.reload();
+	}else {
+		if(passwordinput === confirmpassword){
+			userspush({username, password});
+			localStorage.setItem('users', JSON.stringify(users));
+			alert("User added");
+			location.href = '/login';
+		}else{
+			alert("Password did not match");
+			location.reload();
+		}
+	}
+	
 });
