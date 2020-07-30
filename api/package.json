@@ -1,19 +1,21 @@
 {
-  "name": "trackme",
+  "name": "api",
   "version": "1.0.0",
-  "description": "A web interface to view TrackMe data",
-  "main": "server.js",
+  "description": "api",
+  "main": "api.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon -r dotenv/config api.js"
+    "start": "nodemon api.js"
   },
   "author": "Tiffany Gray",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.26"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
   }
-  
 }

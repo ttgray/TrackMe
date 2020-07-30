@@ -5,9 +5,10 @@
 
 $('#navbar').load('navbar.html');
 $('#footer').load('footer.html');
+const API_URL = 'http://localhost:5000/api';
 
 //const devices = JSON.parse(localStorage.getItem('devices')) || [];
-const response = $.get('http://localhost:3001/devices') .then(response => {
+const response = $.get(`${API_URL}/devices`) .then(response => {
 	response.forEach(device => {
 		$('#devices tbody').append(`
 			<tr>
@@ -51,7 +52,7 @@ $('#add-device').on('click', () => {
 		user,
 		sensorData
 	};
-	$.post('http://localhost:3001/devices', body) .then(response => {
+	$.post(`${API_URL}/devices`, body) .then(response => {
 		location.href = '/';
 	})
 	.catch(error => {
