@@ -5,7 +5,8 @@
 
 $('#navbar').load('navbar.html');
 $('#footer').load('footer.html');
-const API_URL = 'http://localhost:5000/api';
+//const API_URL = 'http://localhost:5000/api';
+const API_URL = 'https://trackme-one.vercel.app/api';
 
 //const devices = JSON.parse(localStorage.getItem('devices')) || [];
 const response = $.get(`${API_URL}/devices`) .then(response => {
