@@ -5,8 +5,9 @@
 
 $('#navbar').load('navbar.html');
 $('#footer').load('footer.html');
-//const API_URL = 'http://localhost:5000/api';
-const API_URL = 'https://trackme-five.vercel.app/api';
+const API_URL = 'http://localhost:5000/api';
+const MQTT_URL = 'http://localhost:5001';
+//const API_URL = 'https://trackme-five.vercel.app/api';
 
 //const devices = JSON.parse(localStorage.getItem('devices')) || [];
 const response = $.get(`${API_URL}/devices`) .then(response => {
@@ -111,8 +112,18 @@ $('#login').on('click', function(){
 });
 
 $('#send-command').on('click', function() {
-	const command = $('#comand').val();
+	const command = $('#command').val();
+	const deviceID = $('#deviceID').val();
+	console.log(`device is: ${deviceID}`);
 	console.log(`command is: ${command}`);
+	
+	const body = {
+		deviceID,
+		command
+	};
+
+	//$.post(`${MQTT_URL}`, body) 
+	$.post(`${MQTT_URL}/send-command`, { "deviceID": deviceID, "command": command })
 });
 
 const logout = () => {

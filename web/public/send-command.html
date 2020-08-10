@@ -14,14 +14,20 @@
        <div class="container">
            <div id="navbar"></div>
            <h1>Register New Device</h1>
-           <div class="form-group">
+           <!--<div class="form-group">
                <label for="user">User</label>
                <input type="text" class="form-control" id="user" />
-	       </div>
-	       <div class="form-group">
+	       </div>-->
+            <div class="form-group">
+                <label for="deviceID">Device ID</label>
+                <textarea rows="2" class="form-control" id="deviceID"></textarea>
+            </div>
+           
+           <div class="form-group">
                <label for="command">Command</label>
                <textarea rows="2" class="form-control" id="command"></textarea>
-	       </div>
+           </div>
+           
 	       <button class="btn btn-success" id="send-command">Save</button>
        </div>
        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
