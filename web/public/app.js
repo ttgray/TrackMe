@@ -111,6 +111,7 @@ $('#login').on('click', function(){
 	
 });
 
+
 $('#send-command').on('click', function() {
 	const command = $('#command').val();
 	const deviceID = $('#deviceID').val();
